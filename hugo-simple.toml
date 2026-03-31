@@ -45,6 +45,12 @@ enableRobotsTXT = true
 # 时区
 timeZone = 'Asia/Shanghai'
 
+# ==================== 摘要配置 ====================
+
+# 摘要长度（字符数）
+summaryLength = 150
+hasCJKLanguage = true
+
 # 分页配置
 [pagination]
   # 每页显示的文章数量
@@ -143,10 +149,7 @@ timeZone = 'Asia/Shanghai'
   # 版权起始年份（可选，默认使用当前年份）
   # since = 2020
 
-  # ==================== 摘要配置 ====================
 
-  # 摘要长度（字符数）
-  summaryLength = 150
 
   # ==================== 功能开关 ====================
 

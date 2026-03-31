@@ -2,6 +2,7 @@
 {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections | default (where site.RegularPages "Section" "posts") }}
 {{ $paginator := .Paginate $pages }}
 
+
 <div class="post-list-simple">
     {{ range $paginator.Pages }}
     <article class="post-item-simple">
@@ -28,6 +29,7 @@
         </div>
 
         <div class="post-summary">
+           
             {{ .Summary }}
         </div>
 

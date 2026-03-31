@@ -1,0 +1,30 @@
+// 模板调试代码使用说明
+// 将以下代码插入到各个模板的 {{ define "main" }} 之后
+// 每个模板使用不同的编号，方便识别
+
+/*
+========================================
+模板编号对应表：
+----------------------------------------
+#1  - layouts/index.html          (首页)
+#2  - layouts/_default/list.html   (列表页)
+#3  - layouts/_default/single.html (文章详情页)
+#4  - layouts/_default/term.html   (分类/标签详情页)
+#5  - layouts/_default/taxonomy.html (分类/标签列表页)
+#6  - layouts/page.html            (独立页面)
+#7  - layouts/archive.html         (归档页)
+#8  - layouts/search/list.html     (搜索页)
+========================================
+*/
+
+// 调试代码模板（复制到各个模板中使用）：
+/*
+<!-- DEBUG #X: 模板名已加载 -->
+<div style="padding: 12px 20px; background: #ff0000; color: white; font-weight: bold; font-size: 16px; margin: 10px 0; border-radius: 4px; font-family: monospace;">
+    🔴 DEBUG #X: 模板名.html 被加载 | Kind: {{ .Kind }} | Title: {{ .Title }} | Type: {{ .Type }} | Section: {{ .Section }}
+</div>
+*/
+
+// 各模板对应的颜色（便于区分）：
+// #1 红色    #2 绿色    #3 蓝色    #4 橙色
+// #5 紫色    #6 青色    #7 粉色    #8 黄色
