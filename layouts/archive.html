@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="archive-page">
+<!--    <h1 class="page-title">{{ .Title }}</h1>-->
+
+    {{ $pages := site.RegularPages }}
+    {{ $grouped := $pages.GroupByDate "2006年" }}
+
+    {{ range $grouped }}
+    <div class="archive-year">
+        <h2 class="archive-year-title">{{ .Key }}</h2>
+        <div class="archive-posts">
+            {{ range .Pages }}
+            <article class="archive-item">
+                <time class="archive-date" datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "01-02" }}
+                </time>
+                <a href="{{ .RelPermalink }}" class="archive-title">{{ .Title }}</a>
+                {{ range .Params.categories }}
+                <span class="archive-category">{{ . }}</span>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</div>
+{{ end }}

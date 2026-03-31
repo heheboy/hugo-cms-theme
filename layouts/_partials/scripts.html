@@ -1,0 +1,36 @@
+<!-- Dark mode toggle script -->
+<script>
+(function() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (!themeToggle) return;
+
+    const html = document.documentElement;
+    const storedTheme = localStorage.getItem('theme');
+
+    if (storedTheme) {
+        html.setAttribute('data-theme', storedTheme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+})();
+</script>
+
+<!-- Mobile menu toggle -->
+<script>
+(function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+    }
+})();
+</script>

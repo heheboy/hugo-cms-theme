@@ -1,0 +1,69 @@
+{{- $headerImage := "" -}}
+{{- $headerTitle := "" -}}
+{{- $headerSubtitle := "" -}}
+
+{{/* 首页 */}}
+{{ if .IsHome }}
+    {{ $headerImage = site.Params.headerImages_home | default "img/home-bg.jpg" }}
+    {{ $headerTitle = site.Title }}
+    {{ $headerSubtitle = site.Params.slogan }}
+
+{{/* 归档页 - 优先于单页判断 */}}
+{{ else if or (eq .Layout "archive") (eq .Section "archive") (eq .RelPermalink "/archive/") (in (slice "归档" "Archive" "archives" "Archives") .Title) }}
+    {{ $headerImage = site.Params.headerImages_archive | default site.Params.headerImages_default | default "img/archive-bg.jpg" }}
+    {{ $headerTitle = site.Params.titleArchive | default "归档" }}
+    {{ $headerSubtitle = site.Params.slogan }}
+
+{{/* 搜索页 - 优先于单页判断 */}}
+{{ else if or (eq .Layout "search") (eq .Section "search") (eq .RelPermalink "/search/") (in (slice "搜索" "Search") .Title) }}
+    {{ $headerImage = site.Params.headerImages_page | default site.Params.headerImages_default | default "img/page-bg.jpg" }}
+    {{ $headerTitle = site.Params.titleSearch | default "搜索" }}
+    {{ $headerSubtitle = site.Params.slogan }}
+
+{{/* 单篇文章页 */}}
+{{ else if .IsPage }}
+    {{ $headerImage = site.Params.headerImages_post | default site.Params.headerImages_default | default "img/post-bg.jpg" }}
+    {{ $headerTitle = .Title }}
+    {{ $headerSubtitle = .Params.subtitle | default site.Params.slogan }}
+
+{{/* 分类/标签列表页 (如 /categories/, /tags/) */}}
+{{ else if eq .Kind "taxonomy" }}
+    {{ $headerImage = site.Params.headerImages_list | default site.Params.headerImages_default | default "img/list-bg.jpg" }}
+    {{ if eq .Data.Plural "categories" }}
+        {{ $headerTitle = site.Params.titleCategories | default "分类" }}
+    {{ else }}
+        {{ $headerTitle = site.Params.titleTags | default "标签" }}
+    {{ end }}
+    {{ $headerSubtitle = site.Params.slogan }}
+
+{{/* 分类/标签文章列表页 (如 /categories/技术/) */}}
+{{ else if eq .Kind "term" }}
+    {{ $headerImage = site.Params.headerImages_list | default site.Params.headerImages_default | default "img/list-bg.jpg" }}
+    {{ if eq .Data.Singular "category" }}
+        {{ $headerTitle = printf "%s：%s" (site.Params.titleCategoryName | default "分类") .Title }}
+    {{ else }}
+        {{ $headerTitle = printf "%s：%s" (site.Params.titleTagName | default "标签") .Title }}
+    {{ end }}
+    {{ $headerSubtitle = site.Params.slogan }}
+
+{{/* 其他列表页（如 /posts/） */}}
+{{ else if .IsNode }}
+    {{ $headerImage = site.Params.headerImages_list | default site.Params.headerImages_default | default "img/list-bg.jpg" }}
+    {{ $headerTitle = .Title }}
+    {{ $headerSubtitle = site.Params.slogan }}
+
+{{/* 其他单页 */}}
+{{ else }}
+    {{ $headerImage = site.Params.headerImages_page | default site.Params.headerImages_default | default "img/page-bg.jpg" }}
+    {{ $headerTitle = .Title }}
+    {{ $headerSubtitle = site.Params.slogan }}
+{{ end }}
+
+<header class="site-header" style="background-image: url('{{ $headerImage | relURL }}')">
+    <div class="header-content">
+        <h1 class="site-title">{{ $headerTitle }}</h1>
+        {{ with $headerSubtitle }}
+        <p class="site-slogan">{{ . }}</p>
+        {{ end }}
+    </div>
+</header>

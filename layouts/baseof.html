@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}" data-theme="{{ if site.Params.darkMode }}dark{{ else }}light{{ end }}">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body>
+    {{ partial "nav.html" . }}
+    {{ partial "header.html" . }}
+
+    <main class="main-container">
+        <div class="content-wrapper">
+            <div class="main-content">
+                {{ block "main" . }}{{ end }}
+            </div>
+            {{ if and (site.Params.showSidebar) (ne .Kind "404") }}
+            <aside class="sidebar">
+                {{ partial "sidebar.html" . }}
+            </aside>
+            {{ end }}
+        </div>
+    </main>
+
+    {{ partial "footer.html" . }}
+    {{ partial "scripts.html" . }}
+</body>
+</html>

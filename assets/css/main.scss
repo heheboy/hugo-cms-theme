@@ -1,0 +1,89 @@
+// CSS Variables - Light Theme (Default)
+:root {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-text: #404040;
+  --color-text-secondary: #6c757d;
+  --color-primary: #0085a1;
+  --color-primary-hover: #006d84;
+  --color-border: #e9ecef;
+  --color-header-bg: rgba(0, 0, 0, 0.5);
+  --color-header-text: #ffffff;
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  --container-max-width: 1200px;
+  --content-width: 750px;
+  --sidebar-width: 300px;
+}
+
+// Dark Theme
+[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-text: #c9d1d9;
+  --color-text-secondary: #8b949e;
+  --color-primary: #58a6ff;
+  --color-primary-hover: #79c0ff;
+  --color-border: #30363d;
+  --color-header-bg: rgba(0, 0, 0, 0.6);
+}
+
+// Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--color-primary-hover);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Import partials
+@import "nav";
+@import "header";
+@import "layout";
+@import "content";
+@import "post";
+@import "sidebar";
+@import "footer";
+@import "archive";
+@import "search";
+@import "pagination";
+@import "responsive";

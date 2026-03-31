@@ -1,0 +1,23 @@
+// Layout
+.main-container {
+  flex: 1;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  width: 100%;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: var(--spacing-xxl);
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0; // Prevent flex item overflow
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+}

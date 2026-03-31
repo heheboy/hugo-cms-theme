@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}">
+<head>
+    {{ partial "head.html" . }}
+    <title>404 | {{ site.Title }}</title>
+</head>
+<body>
+    {{ partial "nav.html" . }}
+
+    <main class="main-container">
+        <div class="error-page" style="text-align: center; padding: var(--spacing-xxl) 0;">
+            <h1 style="font-size: 6rem; color: var(--color-primary); margin-bottom: var(--spacing-md);">404</h1>
+            <h2 style="margin-bottom: var(--spacing-lg);">页面未找到</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl);">
+                {{ site.Params.title_404 | default "抱歉，您访问的页面不存在。" }}
+            </p>
+            <a href="{{ "/" | relURL }}" class="btn" style="
+                display: inline-block;
+                padding: var(--spacing-md) var(--spacing-xl);
+                background-color: var(--color-primary);
+                color: white;
+                border-radius: var(--radius-md);
+                font-weight: 500;
+            ">返回首页</a>
+        </div>
+    </main>
+
+    {{ partial "footer.html" . }}
+    {{ partial "scripts.html" . }}
+</body>
+</html>

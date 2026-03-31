@@ -1,0 +1,15 @@
+{{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections | default (where site.RegularPages "Section" "posts") }}
+[
+{{ range $index, $page := $pages }}
+{{ if $index }},{{ end }}
+{
+    "title": {{ $page.Title | jsonify }},
+    "permalink": {{ $page.RelPermalink | jsonify }},
+    "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
+    "summary": {{ $page.Summary | plainify | jsonify }},
+    "content": {{ $page.Plain | jsonify }},
+    "categories": {{ $page.Params.categories | jsonify }},
+    "tags": {{ $page.Params.tags | jsonify }}
+}
+{{ end }}
+]

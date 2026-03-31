@@ -1,0 +1,56 @@
+<div class="sidebar-widget author-widget">
+    {{ with site.Params.avatar }}
+    <img class="author-avatar" src="{{ . | relURL }}" alt="{{ site.Params.author }}">
+    {{ end }}
+    <h3 class="author-name">{{ site.Params.author }}</h3>
+    {{ with site.Params.bio }}
+    <p class="author-bio">{{ . }}</p>
+    {{ end }}
+
+    {{ if site.Params.social }}
+    <div class="author-social">
+        {{ partial "social.html" . }}
+    </div>
+    {{ end }}
+</div>
+
+{{ if site.Params.showCategories }}
+<div class="sidebar-widget categories-widget">
+    <h4>分类</h4>
+    <div class="category-cloud">
+        {{ range site.Taxonomies.categories.ByCount }}
+        <a href="{{ .Page.RelPermalink }}" class="category-link">
+            {{ .Page.Title }}
+            <span class="category-count">({{ .Count }})</span>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+{{ if site.Params.showTags }}
+<div class="sidebar-widget tags-widget">
+    <h4>标签</h4>
+    <div class="tag-cloud">
+        {{ range site.Taxonomies.tags.ByCount | collections.First 20 }}
+        <a href="{{ .Page.RelPermalink }}" class="tag-link" style="font-size: {{ math.Max 0.8 (math.Min 1.5 (math.Add 0.8 (math.Mul 0.1 .Count))) }}em">
+            {{ .Page.Title }}
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+{{ if and site.Params.linksWidget.enabled site.Params.links }}
+<div class="sidebar-widget links-widget">
+    <h4>{{ site.Params.linksWidget.title | default "友情链接" }}</h4>
+    <div class="links-list">
+        {{ range site.Params.links }}
+        <a href="{{ .url }}" target="_blank" rel="noopener" class="link-item" {{ with .description }}title="{{ . }}"{{ end }}>
+            <span class="link-name">{{ .name }}</span>
+            <svg class="link-arrow" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

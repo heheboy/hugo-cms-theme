@@ -1,0 +1,47 @@
+// Header with background image
+.site-header {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px; // Space for fixed nav
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-header-bg);
+  }
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-header-text);
+}
+
+.site-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.site-slogan {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+  word-wrap: break-word;
+  line-height: 1.6;
+}

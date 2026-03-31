@@ -1,0 +1,59 @@
+// Archive page
+.archive-page {
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+  }
+}
+
+.archive-year {
+  margin-bottom: var(--spacing-xl);
+}
+
+.archive-year-title {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.archive-posts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.archive-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.archive-date {
+  font-family: var(--font-family-mono);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  min-width: 60px;
+}
+
+.archive-title {
+  flex: 1;
+  color: var(--color-text);
+  font-weight: 500;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.archive-category {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}

@@ -1,0 +1,57 @@
+{{ define "main" }}
+<div class="list-page">
+<!--    <h1 class="page-title">
+        {{ .Title }}
+    </h1>-->
+
+    {{ with .Content }}
+    <div class="page-content">
+        {{ . }}
+    </div>
+    {{ end }}
+
+    <div class="post-list-simple">
+        {{ range .Pages }}
+        <article class="post-item-simple">
+            <h2 class="post-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+
+            {{ with .Params.subtitle }}
+            <p class="post-subtitle">{{ . }}</p>
+            {{ end }}
+
+            <div class="post-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "2006年1月2日" }}
+                </time>
+                {{ with .Params.author }}
+                <span class="meta-separator">·</span>
+                <span>{{ . }}</span>
+                {{ end }}
+                {{ range .Params.categories }}
+                <span class="meta-separator">·</span>
+                <a href="{{ "categories/" | relURL }}{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+            </div>
+
+            <div class="post-summary">
+                {{ .Summary }}
+            </div>
+
+            {{ with .Params.tags }}
+            <div class="post-tags">
+                {{ range . }}
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="post-tag">#{{ . }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+
+            <a href="{{ .RelPermalink }}" class="read-more">阅读更多 →</a>
+        </article>
+        {{ end }}
+    </div>
+
+    {{ partial "pagination.html" . }}
+</div>
+{{ end }}

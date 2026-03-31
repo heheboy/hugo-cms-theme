@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ site.Params.description }}{{ end }}{{ end }}">
+<meta name="author" content="{{ .Params.author | default site.Params.author }}">
+{{ hugo.Generator }}
+
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+
+{{ if .OutputFormats.Get "RSS" }}
+<link href="{{ (.OutputFormats.Get "RSS").RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ site.Title }}" />
+{{ end }}
+
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- CSS -->
+{{ $style := resources.Get "css/main.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- SEO -->
+{{ partial "seo.html" . }}

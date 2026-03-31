@@ -1,0 +1,412 @@
+# =============================================================================
+# Hugo CMS Theme - 完整配置文件示例
+# 文件名: hugo.toml
+# 说明: 此文件包含主题支持的所有配置项，请根据需求删减
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 基础站点配置
+# -----------------------------------------------------------------------------
+
+# 网站基础 URL（必填）
+baseURL = 'https://yourdomain.com'
+
+# 语言代码（必填）
+# 可选值: zh-CN, en-US, ja-JP 等
+languageCode = 'zh-CN'
+
+# 默认内容语言
+defaultContentLanguage = 'zh'
+
+# 网站标题（必填）
+title = '我的博客'
+
+# 主题名称（如果作为主题使用）
+theme = 'hugo-cms-theme'
+
+# 内容目录
+contentDir = 'content'
+
+# 静态文件目录
+staticDir = 'static'
+
+# 是否生成 RSS
+disableRSS = false
+
+# 是否生成 404 页面
+disable404 = false
+
+# 是否生成 sitemap
+disableSitemap = false
+
+# 是否生成 robots.txt
+enableRobotsTXT = true
+
+# 时区
+timeZone = 'Asia/Shanghai'
+
+# 分页配置
+[pagination]
+  # 每页显示的文章数量
+  pagerSize = 10
+
+# -----------------------------------------------------------------------------
+# 永久链接配置
+# -----------------------------------------------------------------------------
+
+[permalinks]
+  # 文章 URL 格式
+  posts = '/posts/:slug/'
+  # 页面 URL 格式
+  page = '/:slug/'
+
+# -----------------------------------------------------------------------------
+# 分类法配置（标签和分类）
+# -----------------------------------------------------------------------------
+
+[taxonomies]
+  # 标签
+  tag = 'tags'
+  # 分类
+  category = 'categories'
+  # 作者（可选）
+  # author = 'authors'
+
+# -----------------------------------------------------------------------------
+# Sitemap 站点地图配置
+# -----------------------------------------------------------------------------
+
+[sitemap]
+  # 更新频率
+  changefreq = 'monthly'
+  # 文件名
+  filename = 'sitemap.xml'
+  # 优先级 (0.0-1.0)
+  priority = 0.5
+
+# -----------------------------------------------------------------------------
+# 输出格式配置
+# -----------------------------------------------------------------------------
+
+[outputs]
+  # 首页输出格式（添加 JSON 用于搜索）
+  home = ['HTML', 'RSS', 'JSON']
+  # 页面输出格式
+  page = ['HTML']
+  # 文章输出格式
+  section = ['HTML', 'RSS']
+  # 分类法输出格式
+  taxonomy = ['HTML', 'RSS']
+  # 分类法词条输出格式
+  term = ['HTML', 'RSS']
+
+# -----------------------------------------------------------------------------
+# 主题参数配置
+# -----------------------------------------------------------------------------
+
+[params]
+  # ==================== 基础信息 ====================
+
+  # 站点描述（用于 SEO）
+  description = "这是一个使用 Hugo CMS Theme 构建的个人博客"
+
+  # 作者名称（显示在文章、侧边栏、页脚）
+  author = "作者名"
+
+  # 网站副标题（显示在首页头部）
+  slogan = "记录生活，分享技术"
+
+  # ==================== 页面标题配置 ====================
+  # 分类/标签列表页标题（用于 taxonomy.html）
+  titleCategories = "文章分类"
+  titleTags = "文章标签"
+  # 分类/标签名称（用于 header.html 和 term.html）
+  titleCategoryName = "分类"
+  titleTagName = "标签"
+  # 单页标题
+  titleArchive = "归档"
+  titleSearch = "搜索"
+
+  # 首页头部背景图片路径（相对于 static 目录）
+  # 注意：以下配置已整合到 headerImages 配置块中
+  # header_image = "img/home-bg.jpg"
+
+  # ==================== 头部背景图配置 ====================
+  # 支持为不同页面类型设置不同的背景图（扁平格式）
+  headerImages_home = "img/home-bg.jpg"
+  headerImages_post = "img/post-bg.jpg"
+  headerImages_list = "img/list-bg.jpg"
+  headerImages_archive = "img/archive-bg.jpg"
+  headerImages_page = "img/page-bg.jpg"
+  headerImages_default = "img/default-bg.jpg"
+
+  # 版权起始年份（可选，默认使用当前年份）
+  # since = 2020
+
+  # ==================== 摘要配置 ====================
+
+  # 摘要长度（字符数）
+  summaryLength = 150
+
+  # ==================== 功能开关 ====================
+
+  # 是否显示侧边栏
+  showSidebar = false
+
+  # 是否在侧边栏显示分类云
+  showCategories = false
+
+  # 是否在侧边栏显示标签云
+  showTags = false
+
+  # 是否启用深色模式切换按钮
+  darkMode = false
+
+  # 主内容区块（用于首页文章列表）
+  mainSections = ['posts']
+
+  # ==================== 侧边栏作者信息 ====================
+
+  # 头像图片路径（相对于 static 目录）
+  avatar = "img/avatar.jpg"
+
+  # 个人简介
+  bio = "热爱编程，喜欢分享"
+
+  # ==================== 导航菜单 ====================
+  # 在导航栏显示的菜单项
+
+  [[params.menus]]
+    name = "首页"
+    url = "/"
+    weight = 10
+
+  [[params.menus]]
+    name = "文章"
+    url = "/posts/"
+    weight = 20
+
+  [[params.menus]]
+    name = "分类"
+    url = "/categories/"
+    weight = 30
+
+  [[params.menus]]
+    name = "归档"
+    url = "/archive/"
+    weight = 40
+
+  [[params.menus]]
+    name = "标签"
+    url = "/tags/"
+    weight = 50
+
+  [[params.menus]]
+    name = "关于"
+    url = "/about/"
+    weight = 60
+
+  # ==================== 社交链接 ====================
+  # 会在侧边栏和页脚显示
+
+  [params.social]
+    github = "https://github.com/yourusername"
+    email = "mailto:your@email.com"
+    twitter = "https://twitter.com/yourusername"
+    linkedin = "https://linkedin.com/in/yourusername"
+    bilibili = "https://space.bilibili.com/yourid"
+    facebook = "https://facebook.com/yourusername"
+    wechat = "#"
+    wechatQR = "img/wechat-qr.png"  # 微信二维码图片路径（鼠标悬停显示）
+    instagram = "https://instagram.com/yourusername"
+    # weibo = "https://weibo.com/yourusername"
+    # zhihu = "https://zhihu.com/people/yourusername"
+
+  # ==================== 友情链接 ====================
+  # 显示在侧边栏的友情链接
+
+  [params.linksWidget]
+    # 是否启用
+    enabled = true
+    # 标题
+    title = "友情链接"
+
+  [[params.links]]
+    name = "Hugo 官方"
+    url = "https://gohugo.io"
+    description = "Hugo 静态网站生成器官方文档"
+
+  [[params.links]]
+    name = "示例友站"
+    url = "https://example.com"
+    description = "这是一个示例友情链接"
+
+  # [[params.links]]
+  #   name = "更多友站"
+  #   url = "https://example.org"
+  #   description = "描述文字仅在鼠标悬停时显示"
+
+  # ==================== 页脚信息 ====================
+  # 显示在版权声明下方
+
+  [params.footerInfo]
+    # 网站制作信息
+    [params.footerInfo.site]
+      # 是否显示
+      enabled = true
+      # 显示文字
+      text = "本网站由 Hugo 驱动"
+      # 链接地址（可选，留空则无链接）
+      url = "https://gohugo.io/"
+
+    # 主题信息
+    [params.footerInfo.theme]
+      # 是否显示
+      enabled = true
+      # 显示文字
+      text = "主题采用 hugo-cms-theme"
+      # 主题链接（通常是 GitHub 仓库）
+      url = "https://github.com/yourusername/hugo-cms-theme"
+      # 是否显示 GitHub Star 按钮
+      showStar = true
+      # GitHub 用户名和仓库名（用于构建 Star 按钮链接）
+      githubUser = "yourusername"
+      githubRepo = "hugo-cms-theme"
+
+  # ==================== 评论系统 ====================
+  # 目前支持 Giscus（基于 GitHub Discussions）
+
+  [params.comments]
+    # 是否启用评论
+    enabled = false
+
+    # 评论提供商（目前仅支持 giscus）
+    provider = "giscus"
+
+    [params.comments.giscus]
+      # GitHub 仓库（格式: 用户名/仓库名）
+      repo = "yourusername/yourrepo"
+
+      # 仓库 ID（从 https://giscus.app 获取）
+      repoId = "R_xxxxxxxxxx"
+
+      # 讨论分类名称
+      category = "Announcements"
+
+      # 讨论分类 ID（从 https://giscus.app 获取）
+      categoryId = "DIC_xxxxxxxxxx"
+
+  # ==================== 404 页面 ====================
+
+  # 404 页面提示文字
+  title_404 = "抱歉，您访问的页面不存在。"
+
+  # ==================== 搜索功能 ====================
+  # 搜索功能无需额外配置，自动生成
+
+  # ==================== 图片处理 ====================
+
+  # 文章默认图片质量（Hugo 内置）
+  # [params.imaging]
+  #   quality = 75
+
+# -----------------------------------------------------------------------------
+# 安全设置
+# -----------------------------------------------------------------------------
+
+[security]
+  [security.funcs]
+    # 允许使用 getenv 获取的环境变量
+    getenv = ['^HUGO_', '^CI$']
+
+# -----------------------------------------------------------------------------
+# 图片处理设置
+# -----------------------------------------------------------------------------
+
+[imaging]
+  # 默认图片质量
+  quality = 75
+  # 默认图片格式
+  resampleFilter = 'lanczos'
+  # 是否使用智能裁剪
+  anchor = 'smart'
+
+# -----------------------------------------------------------------------------
+# 构建相关设置
+# -----------------------------------------------------------------------------
+
+[build]
+  # 写入超时时间
+  writeStats = false
+
+# -----------------------------------------------------------------------------
+# 前置事项（Front Matter）默认设置
+# -----------------------------------------------------------------------------
+
+[frontmatter]
+  # 日期字段优先级
+  date = ['date', 'publishDate', 'pubDate', 'published']
+  # 最后修改日期字段
+  lastmod = [':git', 'lastmod', 'modified', 'date', 'publishDate']
+  # 发布日期字段
+  publishDate = ['publishDate', 'pubDate', 'published', 'date']
+
+# -----------------------------------------------------------------------------
+# 语言相关设置（多语言支持）
+# -----------------------------------------------------------------------------
+
+  [languages]
+   [languages.zh]
+     languageName = '简体中文'
+     weight = 1
+     [languages.zh.params]
+       description = '中文站点描述'
+
+  # 示例：添加英文站点
+  # [languages.en]
+  #   languageName = 'English'
+  #   weight = 2
+  #   baseURL = 'https://en.yourdomain.com'
+  #   [languages.en.params]
+  #     description = 'English site description'
+
+# -----------------------------------------------------------------------------
+# 媒体类型
+# -----------------------------------------------------------------------------
+
+[mediaTypes]
+  [mediaTypes.'application/json']
+    suffixes = ['json']
+
+# -----------------------------------------------------------------------------
+# 输出格式详细配置
+# -----------------------------------------------------------------------------
+
+[outputFormats]
+  [outputFormats.RSS]
+    # RSS 文章数量限制
+    limit = 50
+
+# -----------------------------------------------------------------------------
+# 自定义参数（可按需添加）
+# -----------------------------------------------------------------------------
+
+# 站点验证（搜索引擎）
+# [params.verification]
+#   google = "your-google-verification-code"
+#   baidu = "your-baidu-verification-code"
+#   bing = "your-bing-verification-code"
+
+# 分析统计代码
+# [params.analytics]
+#   # Google Analytics 4
+#   google = "G-XXXXXXXXXX"
+#   # 百度统计
+#   baidu = "your-baidu-tracking-id"
+#   # Umami
+#   umami = "your-umami-website-id"
+
+# 广告配置（如有需要）
+# [params.ads]
+#   enabled = false
+#   client = "ca-pub-xxxxxxxxxxxxxxxx"

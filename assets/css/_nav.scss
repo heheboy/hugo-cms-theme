@@ -1,0 +1,137 @@
+// Navigation
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.3s;
+
+  [data-theme="dark"] & {
+    background-color: rgba(13, 17, 23, 0.95);
+  }
+}
+
+.nav-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.nav-link {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  padding: var(--spacing-sm) 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+// Search link
+.nav-search-link {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+
+  svg {
+    fill: currentColor;
+  }
+
+  &::after {
+    display: none;
+  }
+}
+
+// Theme Toggle
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  font-size: 1.25rem;
+  line-height: 1;
+
+  .theme-icon-dark {
+    display: none;
+  }
+
+  [data-theme="dark"] & {
+    .theme-icon-light {
+      display: none;
+    }
+    .theme-icon-dark {
+      display: inline;
+    }
+  }
+}
+
+// Mobile Toggle
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+}

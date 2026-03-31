@@ -1,0 +1,82 @@
+// Responsive design
+@media (max-width: 1024px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+  }
+
+  .main-content {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .site-header {
+    height: 300px;
+  }
+
+  .site-title {
+    font-size: 2rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    flex-direction: column;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+
+    &.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .main-container {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .single-post {
+    padding: var(--spacing-lg);
+  }
+
+  .post-nav {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+
+    a {
+      max-width: 100%;
+
+      &.next-post {
+        text-align: left;
+      }
+    }
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+}

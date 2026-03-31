@@ -1,0 +1,156 @@
+{{ define "main" }}
+<div class="search-page">
+    <h1 class="page-title">搜索</h1>
+
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="输入关键词搜索文章..." autocomplete="off">
+        <button id="search-button" aria-label="搜索">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+    </div>
+
+    <div id="search-stats" class="search-stats"></div>
+
+    <div id="search-results" class="search-results"></div>
+
+    <div id="search-empty" class="search-empty" style="display: none;">
+        <p>未找到相关文章，请尝试其他关键词</p>
+    </div>
+</div>
+
+<!-- Fuse.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+<script>
+(function() {
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const searchResults = document.getElementById('search-results');
+    const searchStats = document.getElementById('search-stats');
+    const searchEmpty = document.getElementById('search-empty');
+
+    let fuse = null;
+    let searchData = [];
+
+    // 加载搜索索引
+    fetch('{{ "index.json" | relURL }}')
+        .then(response => response.json())
+        .then(data => {
+            searchData = data;
+            fuse = new Fuse(data, {
+                keys: [
+                    { name: 'title', weight: 0.4 },
+                    { name: 'content', weight: 0.3 },
+                    { name: 'summary', weight: 0.2 },
+                    { name: 'tags', weight: 0.1 }
+                ],
+                threshold: 0.4,
+                includeScore: true,
+                includeMatches: true
+            });
+        })
+        .catch(err => console.error('加载搜索索引失败:', err));
+
+    // 执行搜索
+    function performSearch(query) {
+        if (!fuse || !query) {
+            searchResults.innerHTML = '';
+            searchStats.textContent = '';
+            searchEmpty.style.display = 'none';
+            return;
+        }
+
+        const results = fuse.search(query);
+
+        if (results.length === 0) {
+            searchResults.innerHTML = '';
+            searchStats.textContent = '';
+            searchEmpty.style.display = 'block';
+        } else {
+            searchEmpty.style.display = 'none';
+            searchStats.textContent = `找到 ${results.length} 个结果`;
+
+            const html = results.map(result => {
+                const item = result.item;
+                const tagsHtml = item.tags ? item.tags.map(tag =>
+                    `<span class="search-result-tag">#${tag}</span>`
+                ).join('') : '';
+
+                // 高亮匹配的内容
+                let snippet = item.summary || item.content.substring(0, 200);
+                if (result.matches) {
+                    result.matches.forEach(match => {
+                        if (match.key === 'content' || match.key === 'summary') {
+                            const indices = match.indices[0];
+                            const start = Math.max(0, indices[0] - 30);
+                            const end = Math.min(snippet.length, indices[1] + 30);
+                            snippet = snippet.substring(start, end);
+                        }
+                    });
+                }
+
+                return `
+                    <article class="search-result-item">
+                        <h2 class="search-result-title">
+                            <a href="${item.permalink}">${highlightText(item.title, result.matches, 'title')}</a>
+                        </h2>
+                        <div class="search-result-meta">
+                            <time>${item.date}</time>
+                            ${item.categories ? '· ' + item.categories.join(', ') : ''}
+                        </div>
+                        <p class="search-result-summary">${snippet}...</p>
+                        ${tagsHtml ? '<div class="search-result-tags">' + tagsHtml + '</div>' : ''}
+                    </article>
+                `;
+            }).join('');
+
+            searchResults.innerHTML = html;
+        }
+    }
+
+    // 高亮匹配文本
+    function highlightText(text, matches, key) {
+        if (!matches) return text;
+
+        const match = matches.find(m => m.key === key);
+        if (!match) return text;
+
+        let result = text;
+        // 从后往前替换，避免索引错位
+        const indices = match.indices.slice().reverse();
+        indices.forEach(([start, end]) => {
+            result = result.substring(0, start) +
+                     '<mark>' + result.substring(start, end + 1) + '</mark>' +
+                     result.substring(end + 1);
+        });
+
+        return result;
+    }
+
+    // 事件监听
+    searchInput.addEventListener('input', function(e) {
+        performSearch(e.target.value.trim());
+    });
+
+    searchButton.addEventListener('click', function() {
+        performSearch(searchInput.value.trim());
+    });
+
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch(searchInput.value.trim());
+        }
+    });
+
+    // 如果 URL 中有查询参数，自动搜索
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q');
+    if (query) {
+        searchInput.value = query;
+        performSearch(query);
+    }
+})();
+</script>
+{{ end }}
