@@ -13,40 +13,16 @@
     </div>
     {{ end }}
 
-    <div class="post-list-simple">
+    <div class="archive-posts">
         {{ range .Pages }}
-        <article class="post-item-simple">
-            <h2 class="post-title">
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </h2>
-
-            {{ with .Params.subtitle }}
-            <p class="post-subtitle">{{ . }}</p>
+        <article class="archive-item">
+            <time class="archive-date" datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "2006-01-02" }}
+            </time>
+            <a href="{{ .RelPermalink }}" class="archive-title">{{ .Title }}</a>
+            {{ range .Params.categories }}
+            <span class="archive-category">{{ . }}</span>
             {{ end }}
-
-            <div class="post-meta">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">
-                    {{ .Date.Format "2006年1月2日" }}
-                </time>
-                {{ with .Params.author }}
-                <span class="meta-separator">·</span>
-                <span>{{ . }}</span>
-                {{ end }}
-            </div>
-
-            <div class="post-summary">
-                {{ .Summary }}
-            </div>
-
-            {{ with .Params.tags }}
-            <div class="post-tags">
-                {{ range . }}
-                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="post-tag">#{{ . }}</a>
-                {{ end }}
-            </div>
-            {{ end }}
-
-            <a href="{{ .RelPermalink }}" class="read-more">阅读更多 →</a>
         </article>
         {{ end }}
     </div>
