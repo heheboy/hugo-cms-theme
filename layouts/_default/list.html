@@ -1,5 +1,6 @@
 {{ define "main" }}
 
+{{ $paginator := .Paginate .Pages }}
 
 <div class="list-page">
 <!--    <h1 class="page-title">
@@ -13,7 +14,7 @@
     {{ end }}
 
     <div class="post-list-simple">
-        {{ range .Pages }}
+        {{ range $paginator.Pages }}
         <article class="post-item-simple">
             <h2 class="post-title">
                 <a href="{{ .RelPermalink }}">{{ .Title }}</a>
